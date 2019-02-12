@@ -19,7 +19,7 @@ public class Calculator {
 		while (!operation.equalsIgnoreCase("r")) {
 			try {
 				operation = input.next();
-				operation.toLowerCase();
+				operation = operation.toLowerCase();
 				if (operation.charAt(0) == '+') {
 					result += Double.parseDouble(operation.substring(1));
 					System.out.println("New Result = " + result);
@@ -46,6 +46,7 @@ public class Calculator {
 					if (operation.charAt(0) == 'y') {
 						result = 0.0;
 						System.out.println("Result = " + result);
+						operation = "";
 					}
 					else if(operation.charAt(0) == ('n')) {
 						System.out.println("goodbye!");
