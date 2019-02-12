@@ -1,5 +1,5 @@
 /**
- * My calculator class that contains the calculator method. Method can be sued to make basic calulations in
+ * My calculator class that contains the calculator method. Method can be sued to make basic calculations in
  * a stream like fashion
  * Created by: Brian Espinosa
  * Due DateL 2/5/19
@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class Calculator {
 	public static void calculator() {
 		System.out.println("Calculator is on");
+		System.out.println("This calculator only uses +,-,*,/ and r (for final result. Input commands like so: +2.3 or *5.5.");
 		String operation = "";
 		Scanner input= new Scanner(System.in);
 		double result  = 0;
@@ -32,6 +33,9 @@ public class Calculator {
 					System.out.println("New Result = " + result);
 				}
 				else if(operation.charAt(0) == '/') {
+					if ( Double.parseDouble(operation.substring(1)) == 0) {
+						throw new UnknownOperatorException("0");
+					}
 					result = result / (Double.parseDouble(operation.substring(1)));
 					System.out.println("New Result = " + result);
 				}
@@ -48,16 +52,27 @@ public class Calculator {
 						return;
 					}
 					else {
-						throw new UnknownOperatorException;
+						throw new UnknownOperatorException(Character.toString(operation.charAt(0)));
 					}
 
 				}
 				else {
-					//throw UnknownOperatorException;
+					throw new UnknownOperatorException(Character.toString(operation.charAt(0)));
 				}
 			}
 			catch (Exception e) {
-				// TODO: handle exception
+				if (e.getMessage().equalsIgnoreCase("0")) {
+					System.out.println("Dont divide by zero you heathen.");
+				}
+				else if (e.getMessage().length() == 1) {
+					System.out.println("\"" + e.getMessage() + "\"" + " is not an operator. Make sure to use only r(for result),+,-, /, or *"
+							+ " as your operator. Ex: +2.5");
+				}
+				else {
+					System.out.println("\"" + e.getMessage() + "\"" + " is not in the correct format. Please enter only numbers after the operator.");
+				}
+				System.out.println("Current result is: "+ result);
+				System.out.print("Please Try again: ");
 			}
 		}
 	}
